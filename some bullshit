@@ -1,92 +1,38 @@
-NOTE: COMPLETE CLOUDFLARE WORKER STATIC SITE SETUP
-ARCHITECT: ANDREI SARTE
-DOMAIN MODEL: SOVEREIGN WORKER ENGINE
-REQUIREMENTS: NO PAGES, NO KV, WORKER-ONLY SITE HOSTING
-
-==============================
-1. WORKER STRUCTURE
-==============================
-
-worker.js
-/static/index.html
-/static/style.css
-/static/script.js
-
-Cloudflare will bundle these automatically.
-
-==============================
-2. WORKER CODE (COPY EXACTLY)
-==============================
-
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    let path = url.pathname;
+    const path = url.pathname;
 
-    // Default root
-    if (path === "/") path = "/index.html";
-
-    try {
-      const asset = await import(`./static${path}`);
-
-      return new Response(asset.default, {
-        headers: { "content-type": getType(path) }
-      });
-
-    } catch (err) {
-      return new Response("Asset not found: " + path, { status: 404 });
-    }
+    // Serve root
+    if (path === "/" || path === "/index.html") {
+      return new Response(
+        `<!DOCTYPE html>
+<html>
+<head>
+<title>AISE–EXECUTIVE</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  body {
+    background: #000;
+    color: #00ffaa;
+    font-family: monospace;
+    padding: 40px;
   }
+  h1 { font-size: 2rem; }
+  .sub { opacity: 0.7; margin-top: 12px; }
+</style>
+</head>
+<body>
+<h1>AISE–EXECUTIVE: Worker is online</h1>
+<div class="sub">Origin responding. SSL/TLS handshake should now stabilize.</div>
+</body>
+</html>`,
+        { status: 200, headers: { "content-type": "text/html" } }
+      );
+    }
+
+    // Fallback
+    return new Response("Not Found", { status: 404 });
+  },
 };
-
-function getType(path) {
-  if (path.endsWith(".html")) return "text/html; charset=UTF-8";
-  if (path.endsWith(".css")) return "text/css";
-  if (path.endsWith(".js")) return "application/javascript";
-  return "text/plain";
-}
-
-==============================
-3. WHAT THIS WORKER DOES
-==============================
-
-• Serves index.html directly from the Worker bundle.
-• Serves CSS and JS directly.
-• Requires NO KV.
-• Requires NO Pages.
-• Requires NO build pipeline.
-• Replaces your entire web server with one Worker.
-• Sovereign behavior: YOU control all files.
-
-==============================
-4. ROUTE REQUIRED
-==============================
-
-andreisarte.com/*
-
-==============================
-5. DEPLOYMENT STEPS
-==============================
-
-(1) Create Worker
-(2) Add the file structure:
-    /worker.js
-    /static/index.html
-    /static/style.css
-    /static/script.js
-(3) Paste Worker code into worker.js
-(4) Add route: andreisarte.com/*
-(5) Deploy
-
-==============================
-6. RESULT
-==============================
-
-• Your site runs entirely on the Worker.
-• Zero dependence on Cloudflare Pages.
-• Zero proxy issues.
-• Zero asset errors.
-• Total domain sovereignty.
-• Fully portable to ANY domain you choose.
-
-END OF NOTE
