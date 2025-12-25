@@ -189,3 +189,43 @@ body {
   display: flex;
   gap: 0.5rem;
 }
+/* SIGNAL HUB — EXTERNAL CHANNEL ROUTER */
+#hub {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+#hub .section-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+#hub .section-text {
+  opacity: 0.7;
+  max-width: 420px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.hub-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hub-btn {
+  display: block;
+  width: 260px;
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+  color: #0a0a0a;
+  background: #e6e6e6;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.hub-btn:hover {
+  background: #ffffff;
+}
