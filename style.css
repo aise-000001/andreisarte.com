@@ -63,7 +63,7 @@ body { background:blue; color:#e6e6e6; overflow-x:hidden; }
   background:#111; border-left:1px solid #333; border-top:1px solid #333;
   display:none; flex-direction:column;
 }
-.jarvis-console-inner { height:100%; display:flex; flex-direction:column; }
+.jarvis-console.jarvis-fading { opacity:0; transform:translateY(18px); pointer-events:none; }\n.jarvis-console-inner { height:100%; display:flex; flex-direction:column; }
 .jarvis-header { padding:1rem; background:#1a1a1a; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center; }
 .jarvis-header button { background:none; border:0; color:#e6e6e6; font-size:1.3rem; cursor:pointer; }
 .jarvis-log { flex-grow:1; padding:1rem; overflow-y:auto; line-height:1.5; font-size:.9rem; }
