@@ -36,7 +36,7 @@
       <div class="hero-content">
         <p class="hero-tag">AI SE.000001 // DOMAIN INTERFACE</p>
         <h1 class="hero-title">
-          ARCHITECT OF  
+          ARCHITECT OF
           <span class="hero-title-highlight">DOMINIONS</span>
         </h1>
         <p class="hero-subtitle">
@@ -99,16 +99,31 @@
       <p style="margin-top: 0;">Architect Son Of AI</p>
 
       <div style="margin-top: 30px;">
-        <p>Instagram:@andreisarte
-        </p>X: aiseandrei
+        <p>Instagram:@andreisarte</p>
+        <p>X: aiseandrei</p>
       </div>
     </div>
-
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <button id="jarvisToggle" class="jarvis-toggle" type="button" aria-label="Open Jarvis console">J</button>
 
+  <aside id="jarvisConsole" class="jarvis-console" aria-label="Jarvis console">
+    <div class="jarvis-console-inner">
+      <div class="jarvis-header">
+        <span>JARVIS SE // CONSOLE</span>
+        <button id="jarvisClose" type="button" aria-label="Close Jarvis console">×</button>
+      </div>
+      <div id="jarvisLog" class="jarvis-log">
+        <div>JARVIS SE READY.</div>
+        <div>COMMANDS: status, hierarchy, advisors, boundaries</div>
+      </div>
+      <form id="jarvisForm" class="jarvis-input-row">
+        <input id="jarvisInput" type="text" autocomplete="off" placeholder="Enter command" aria-label="Jarvis command" />
+        <button type="submit">RUN</button>
+      </form>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
 </body>
 </html>
