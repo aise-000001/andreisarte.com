@@ -9,28 +9,50 @@ const form = document.getElementById("jarvisForm");
 
 const introCopy = document.createElement("div");
 introCopy.className = "jarvis-intro-copy";
-introCopy.innerHTML = "JARVIS // INITIALIZING<br>AISE DOMAIN ONLINE";
 document.body.appendChild(introCopy);
 
 let introActive = false;
 let introTimer;
+let introPhaseTimer;
 
 function finishIntro(openJarvis = false) {
   if (!introActive) return;
   introActive = false;
   clearTimeout(introTimer);
+  clearTimeout(introPhaseTimer);
   introCopy.classList.remove("visible");
   toggle.classList.remove("jarvis-intro");
   sessionStorage.setItem("aiseJarvisIntroSeen", "1");
   if (openJarvis) setTimeout(openConsole, 650);
 }
 
+function showJarvisArrival() {
+  if (!introActive) return;
+  introCopy.classList.remove("visible");
+
+  setTimeout(() => {
+    if (!introActive) return;
+    toggle.classList.add("jarvis-intro");
+    introCopy.innerHTML = "JARVIS // INITIALIZING<br>AISE DOMAIN ONLINE";
+    introCopy.classList.add("visible");
+  }, 300);
+}
+
 function startIntro() {
   if (sessionStorage.getItem("aiseJarvisIntroSeen")) return;
+
   introActive = true;
-  toggle.classList.add("jarvis-intro");
+  toggle.style.visibility = "hidden";
+  introCopy.innerHTML = "<strong>WELCOME. YOU HAVE ARRIVED.</strong><br>Please wait as your assistant arrives.";
+
   requestAnimationFrame(() => introCopy.classList.add("visible"));
-  introTimer = setTimeout(() => finishIntro(false), 1800);
+
+  introPhaseTimer = setTimeout(() => {
+    toggle.style.visibility = "";
+    showJarvisArrival();
+  }, 1800);
+
+  introTimer = setTimeout(() => finishIntro(false), 3900);
 }
 
 function openConsole() {
