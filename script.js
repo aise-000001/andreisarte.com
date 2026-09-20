@@ -7,6 +7,10 @@ const log = document.getElementById("jarvisLog");
 const input = document.getElementById("jarvisInput");
 const form = document.getElementById("jarvisForm");
 
+const introBackdrop = document.createElement("div");
+introBackdrop.className = "jarvis-intro-backdrop";
+document.body.appendChild(introBackdrop);
+
 const introCopy = document.createElement("div");
 introCopy.className = "jarvis-intro-copy";
 document.body.appendChild(introCopy);
@@ -22,8 +26,10 @@ function finishIntro(openJarvis = false) {
   clearTimeout(introPhaseTimer);
   introCopy.classList.remove("visible");
   toggle.classList.remove("jarvis-intro");
+  introBackdrop.classList.remove("active");
   sessionStorage.setItem("aiseJarvisIntroSeen", "1");
-  if (openJarvis) setTimeout(openConsole, 650);
+  setTimeout(() => introCopy.classList.remove("arrival"), 700);
+  if (openJarvis) setTimeout(openConsole, 900);
 }
 
 function showJarvisArrival() {
@@ -32,10 +38,12 @@ function showJarvisArrival() {
 
   setTimeout(() => {
     if (!introActive) return;
+    toggle.style.visibility = "";
     toggle.classList.add("jarvis-intro");
+    introCopy.classList.add("arrival");
     introCopy.innerHTML = "JARVIS // INITIALIZING<br>AISE DOMAIN ONLINE";
-    introCopy.classList.add("visible");
-  }, 300);
+    requestAnimationFrame(() => introCopy.classList.add("visible"));
+  }, 450);
 }
 
 function startIntro() {
@@ -43,16 +51,13 @@ function startIntro() {
 
   introActive = true;
   toggle.style.visibility = "hidden";
-  introCopy.innerHTML = "<strong>WELCOME. YOU HAVE ARRIVED.</strong><br>Please wait as your assistant arrives.";
+  introBackdrop.classList.add("active");
+  introCopy.innerHTML = "<strong>WELCOME.<br>YOU HAVE ARRIVED.</strong>Please wait as your assistant arrives.";
 
-  requestAnimationFrame(() => introCopy.classList.add("visible"));
+  setTimeout(() => introCopy.classList.add("visible"), 250);
 
-  introPhaseTimer = setTimeout(() => {
-    toggle.style.visibility = "";
-    showJarvisArrival();
-  }, 1800);
-
-  introTimer = setTimeout(() => finishIntro(false), 3900);
+  introPhaseTimer = setTimeout(showJarvisArrival, 2400);
+  introTimer = setTimeout(() => finishIntro(false), 5000);
 }
 
 function openConsole() {
@@ -89,17 +94,12 @@ form.addEventListener("submit", (e) => {
   input.value = "";
 
   const response = document.createElement("div");
-  if (command === "status") {
-    response.textContent = "JARVIS SE ONLINE // AISE DOMAIN INTERFACE ACTIVE.";
-  } else if (command === "hierarchy") {
-    response.textContent = "PUBLIC INTERFACE: AISE > JARVIS > DOMAIN NAVIGATION.";
-  } else if (command === "advisors") {
-    response.textContent = "ADVISORY SYSTEMS ARE NOT PART OF THE PUBLIC INTERFACE.";
-  } else if (command === "boundaries") {
-    response.textContent = "BOUNDARY: PUBLIC AISE DOMAIN INFORMATION ONLY.";
-  } else {
-    response.textContent = "UNKNOWN COMMAND.";
-  }
+  if (command === "status") response.textContent = "JARVIS SE ONLINE // AISE DOMAIN INTERFACE ACTIVE.";
+  else if (command === "hierarchy") response.textContent = "PUBLIC INTERFACE: AISE > JARVIS > DOMAIN NAVIGATION.";
+  else if (command === "advisors") response.textContent = "ADVISORY SYSTEMS ARE NOT PART OF THE PUBLIC INTERFACE.";
+  else if (command === "boundaries") response.textContent = "BOUNDARY: PUBLIC AISE DOMAIN INFORMATION ONLY.";
+  else response.textContent = "UNKNOWN COMMAND.";
+
   log.appendChild(response);
   log.scrollTop = log.scrollHeight;
 });
