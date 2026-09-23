@@ -17,7 +17,8 @@ document.body.appendChild(introCopy);
 
 let introActive = false;
 let introTimer;
-let introPhaseTimer;\nlet standbyTimer;
+let introPhaseTimer;
+let standbyTimer;
 
 function finishIntro(openJarvis = false) {
   if (!introActive) return;
@@ -27,9 +28,9 @@ function finishIntro(openJarvis = false) {
   introCopy.classList.remove("visible");
   toggle.classList.remove("jarvis-intro");
   introBackdrop.classList.remove("active");
-  sessionStorage.setItem("aiseJarvisIntroSeen", "1");
   setTimeout(() => introCopy.classList.remove("arrival"), 700);
-  if (openJarvis) setTimeout(openConsole, 900);\n  else setTimeout(introduceJarvis, 950);
+  if (openJarvis) setTimeout(openConsole, 900);
+  else setTimeout(introduceJarvis, 950);
 }
 
 function showJarvisArrival() {
@@ -47,8 +48,6 @@ function showJarvisArrival() {
 }
 
 function startIntro() {
-  if (sessionStorage.getItem("aiseJarvisIntroSeen")) return;
-
   introActive = true;
   toggle.style.visibility = "hidden";
   introBackdrop.classList.add("active");
