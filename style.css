@@ -109,3 +109,14 @@ body::before {
   .jarvis-intro-copy.arrival { top:calc(42% + 140px); }
 }
 @media (prefers-reduced-motion:reduce) { .jarvis-toggle,.jarvis-intro-copy,.jarvis-intro-backdrop { transition:none; } }
+
+/* SOCIAL CHANNEL AVATARS */
+.sovereign-links ul { list-style:none; display:flex; flex-wrap:wrap; gap:14px; }
+.social-link { display:flex; align-items:center; gap:9px; color:#e6e6e6; text-decoration:none; }
+.social-avatar {
+  width:34px; height:34px; border-radius:50%; display:inline-flex;
+  align-items:center; justify-content:center; font-size:.65rem; font-weight:800;
+  letter-spacing:.04em; background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.28); transition:transform .2s ease, background .2s ease;
+}
+.social-link:hover .social-avatar { transform:scale(1.1); background:rgba(255,255,255,.2); }
