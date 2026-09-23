@@ -120,3 +120,59 @@ body::before {
   border:1px solid rgba(255,255,255,.28); transition:transform .2s ease, background .2s ease;
 }
 .social-link:hover .social-avatar { transform:scale(1.1); background:rgba(255,255,255,.2); }
+
+
+/* AISE CONCEPTUAL THEATER */
+.hero { gap:4rem; min-height:calc(115vh - 8rem); }
+.hero-content { flex:1 1 48%; }
+.concept-theater { flex:1 1 46%; min-width:360px; align-self:center; perspective:900px; }
+.theater-proscenium {
+  position:relative; height:390px; overflow:hidden; border:1px solid rgba(122,168,255,.38);
+  border-radius:180px 180px 12px 12px; background:linear-gradient(180deg,#02040a 0%,#07101e 72%,#020308 100%);
+  box-shadow:0 30px 80px rgba(0,0,0,.45), inset 0 0 70px rgba(122,168,255,.06);
+}
+.theater-proscenium::before {
+  content:""; position:absolute; z-index:5; left:7%; right:7%; top:7%; height:12px;
+  border-top:1px solid rgba(255,255,255,.22); border-radius:50%;
+}
+.theater-curtain { position:absolute; z-index:3; top:0; width:34%; height:82%; opacity:.88; }
+.curtain-left {
+  left:0; transform-origin:top left; transform:skewX(-7deg);
+  background:linear-gradient(90deg,#05070c,#17223d 48%,#080b13);
+  clip-path:polygon(0 0,100% 0,70% 100%,0 88%);
+}
+.curtain-right {
+  right:0; transform-origin:top right; transform:skewX(7deg);
+  background:linear-gradient(270deg,#05070c,#17223d 48%,#080b13);
+  clip-path:polygon(0 0,100% 0,100% 88%,30% 100%);
+}
+.theater-stage { position:absolute; inset:14% 12% 8%; overflow:hidden; }
+.stage-light {
+  position:absolute; top:-18%; width:34%; height:92%; opacity:.42; filter:blur(3px);
+  background:linear-gradient(180deg,rgba(170,205,255,.62),rgba(70,120,255,.05) 80%,transparent);
+  clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
+  animation:theaterSweep 7s ease-in-out infinite alternate;
+}
+.light-left { left:5%; transform:rotate(13deg); transform-origin:top center; }
+.light-right { right:5%; transform:rotate(-13deg); transform-origin:top center; animation-delay:-3.5s; }
+.stage-mark {
+  position:absolute; z-index:2; left:50%; top:49%; transform:translate(-50%,-50%);
+  font-family:Georgia,"Times New Roman",serif; font-size:clamp(2rem,4vw,3.8rem); letter-spacing:.2em;
+  color:rgba(230,238,255,.9); text-shadow:0 0 24px rgba(122,168,255,.5);
+}
+.stage-floor {
+  position:absolute; left:-20%; right:-20%; bottom:-24%; height:48%;
+  border:1px solid rgba(122,168,255,.18); border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(122,168,255,.16),rgba(3,6,12,.92) 65%);
+  transform:rotateX(62deg);
+}
+.theater-caption { margin-top:.8rem; text-align:center; font-size:.68rem; letter-spacing:.22em; opacity:.55; }
+@keyframes theaterSweep {
+  0% { opacity:.25; translate:-10px 0; }
+  100% { opacity:.55; translate:10px 0; }
+}
+@media (max-width:900px) {
+  .hero { flex-direction:column; align-items:stretch; padding:4rem 0; }
+  .concept-theater { width:100%; min-width:0; }
+}
+@media (prefers-reduced-motion:reduce) { .stage-light { animation:none; } }
