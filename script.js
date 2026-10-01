@@ -6,6 +6,20 @@ const closeBtn = document.getElementById("jarvisClose");
 const log = document.getElementById("jarvisLog");
 const input = document.getElementById("jarvisInput");
 const form = document.getElementById("jarvisForm");
+const stageAudio = document.getElementById("aiseStageAudio");
+
+// Browsers require a visitor interaction before audible media can begin.
+// The soundtrack loops continuously after the visitor's first interaction.
+if (stageAudio) {
+  stageAudio.volume = 0.35;
+  const startStageAudio = () => {
+    stageAudio.play().catch(() => {});
+    document.removeEventListener("pointerdown", startStageAudio);
+    document.removeEventListener("keydown", startStageAudio);
+  };
+  document.addEventListener("pointerdown", startStageAudio, { once: true });
+  document.addEventListener("keydown", startStageAudio, { once: true });
+}
 
 const introBackdrop = document.createElement("div");
 introBackdrop.className = "jarvis-intro-backdrop";
