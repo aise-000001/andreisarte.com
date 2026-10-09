@@ -118,3 +118,12 @@ form.addEventListener("submit", (e) => {
 });
 
 startIntro();
+
+// Same-tab navigation gives the personal game the full screen and avoids an
+// embedded private sign-in wall. The ordinary link also works without scripts.
+const domainEntry = document.getElementById("enterDomain");
+if (domainEntry && stageAudio) {
+  domainEntry.addEventListener("click", (event) => {
+    if (event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) stageAudio.pause();
+  });
+}

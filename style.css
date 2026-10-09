@@ -176,3 +176,14 @@ body::before {
   .concept-theater { width:100%; min-width:0; }
 }
 @media (prefers-reduced-motion:reduce) { .stage-light { animation:none; } }
+
+/* The Stage: a threshold into Andrei's separate personal adventure. */
+#stage { scroll-margin-top:2rem; }
+.domain-stage .stage-mark { top:38%; width:100%; text-align:center; font-size:clamp(1.8rem,3.3vw,2.9rem); letter-spacing:.14em; }
+.stage-game-title { display:block; margin-top:.6rem; font-family:Georgia,"Times New Roman",serif; font-size:1.1rem; font-style:italic; font-weight:400; letter-spacing:.08em; color:#c7d5ec; }
+.stage-domain-entry { position:absolute; z-index:6; bottom:13%; left:50%; transform:translateX(-50%); display:flex; justify-content:center; align-items:center; min-height:52px; width:max-content; max-width:100%; padding:.9rem 1.4rem; border:1px solid #b5cae3; border-radius:4px; background:linear-gradient(120deg,#111e32ee,#263649ee); color:#f1f5fc; text-decoration:none; text-align:center; font-family:Georgia,"Times New Roman",serif; font-size:1.05rem; letter-spacing:.04em; box-shadow:0 0 28px #89adcf26; transition:background .2s ease,box-shadow .2s ease,border-color .2s ease; }
+.stage-domain-entry:hover { background:#334b68; border-color:#fff; box-shadow:0 0 36px #a7c9ec55; }
+.stage-domain-entry:focus-visible { outline:3px solid #fff2bd; outline-offset:5px; }
+.domain-stage .theater-proscenium:has(.stage-domain-entry:hover) .stage-light { opacity:.7; }
+@media(max-width:600px) { .top-bar { gap:1rem; flex-wrap:wrap; }.nav-links { display:flex; flex-wrap:wrap; gap:1rem; }.nav-links a { margin-left:0; }.domain-stage .theater-proscenium { height:360px; }.stage-domain-entry { font-size:1rem; max-width:calc(100% - 12px); } }
+@media(prefers-reduced-motion:reduce) { .stage-domain-entry { transition:none; } }
